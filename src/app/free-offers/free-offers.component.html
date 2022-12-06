@@ -1,0 +1,47 @@
+<mat-card>
+    <mat-card-header>
+        <mat-card-title>Free Offers</mat-card-title>
+    </mat-card-header>
+    <table mat-table [dataSource]="freeOffersDataSource">
+        <ng-container matColumnDef="select">
+            <th mat-header-cell *matHeaderCellDef>
+                <mat-checkbox (change)="$event ? toggleAllRows() : null" [checked]="freeSelection.hasValue() && isAllSelected()" [indeterminate]="freeSelection.hasValue() && !isAllSelected()" [aria-label]="checkboxLabel()">
+                </mat-checkbox>
+            </th>
+            <td mat-cell *matCellDef="let row">
+                <mat-checkbox (click)="$event.stopPropagation()" (change)="$event ? selectFreeOffer(row) : null" [checked]="freeSelection.isSelected(row)" [aria-label]="checkboxLabel(row)">
+                </mat-checkbox>
+            </td>
+        </ng-container>
+        <ng-container matColumnDef="name">
+            <th mat-header-cell *matHeaderCellDef> Offer Name </th>
+            <td mat-cell *matCellDef="let element"> {{element.name}} </td>
+        </ng-container>
+        <ng-container matColumnDef="items">
+            <th mat-header-cell *matHeaderCellDef> Items </th>
+            <td mat-cell *matCellDef="let element">
+
+                <table>
+                    <tr>
+                        <th>Item Name</th>
+                        <th>Quantity</th>
+                        <th>Price</th>
+                    </tr>
+                    <tr *ngFor="let item of element.items">
+                        <td>{{item.item_name}} {{item.free ? "( Free )" : ''}}</td>
+                        <td>{{item.quantity}}</td>
+                        <td>{{item.price}}</td>
+                    </tr>
+                </table>
+
+            </td>
+        </ng-container>
+        <ng-container matColumnDef="price">
+            <th mat-header-cell *matHeaderCellDef> Price </th>
+            <td mat-cell *matCellDef="let element"> {{element.price}} </td>
+        </ng-container>
+
+        <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+        <tr mat-row *matRowDef="let row; columns: displayedColumns;" (click)="selectFreeOffer(row)"></tr>
+    </table>
+</mat-card>
