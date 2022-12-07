@@ -5,6 +5,7 @@ import { MatDialog } from '@angular/material/dialog';
 import { OfferDialog } from '../dialog/offer/offer.dialog';
 import { SelectionModel } from '@angular/cdk/collections';
 import { MenuItems } from '../core/interfaces/caffe_interace';
+import { ItemDialog } from '../dialog/item/item.dialog';
 
 
 
@@ -32,6 +33,10 @@ export class ItemsComponent implements OnInit, AfterViewInit {
     }
 
     ngOnInit(): void {
+        this.loadMenuItems()
+    }
+
+    loadMenuItems(){
         this.itemDataSource.getMenuItems().then(() => {
         })
     }
@@ -51,7 +56,10 @@ export class ItemsComponent implements OnInit, AfterViewInit {
     }
 
     addItems() {
-
+        const dialogRef = this.dialog.open(ItemDialog, { restoreFocus: false, disableClose: true })
+        dialogRef.afterClosed().subscribe(() => {
+            this.loadMenuItems()
+        });
     }
 
     isAllSelected() {

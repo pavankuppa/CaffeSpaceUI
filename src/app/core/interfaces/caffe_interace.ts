@@ -67,3 +67,13 @@ export interface OrderStatus {
     order_number: string;
     status: string;
 }
+
+export interface VariantAttributes {
+    quantity: string;
+    price: number;
+}
+
+export interface CreateItem {
+    name: string;
+    variant_attributes: VariantAttributes[];
+}

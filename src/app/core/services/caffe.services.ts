@@ -3,6 +3,7 @@ import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
+import { CreateItem } from '../interfaces/caffe_interace';
 const API_URL = environment.appURL;
 
 @Injectable({ providedIn: 'root' })
@@ -33,11 +34,15 @@ export class CaffeServices {
         }));
     }
 
-    createOrders(body: any): Promise<any> {
-        return this.http.post(`${API_URL}/orders.json`, body).toPromise()
+    createOrders(params: any): Promise<any> {
+        return this.http.post(`${API_URL}/orders.json`, params).toPromise()
     }
 
-    createOffers(body: any): Promise<any>{
-        return this.http.post(`${API_URL}/offers.json`, body).toPromise()
+    createOffers(params: any): Promise<any>{
+        return this.http.post(`${API_URL}/offers.json`, params).toPromise()
+    }
+
+    createItems(params: any): Promise<any>{
+        return this.http.post(`${API_URL}/items.json`, params).toPromise()
     }
 }

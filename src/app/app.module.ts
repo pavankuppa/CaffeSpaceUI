@@ -22,41 +22,45 @@ import { OfferDialog } from './dialog/offer/offer.dialog';
 import { MatOptionModule } from '@angular/material/core';
 import { MatSelectModule } from '@angular/material/select';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
+import { MatIconModule } from '@angular/material/icon';
 import { FormsModule } from '@angular/forms';
+import { ItemDialog } from './dialog/item/item.dialog';
 
 @NgModule({
-  declarations: [
-    AppComponent,
-    ItemsComponent,
-    DiscountOffersComponent,
-    FreeOffersComponent,
-    OrdersComponent,
-    OfferDialog
-  ],
-  imports: [
-    BrowserModule,
-    AppRoutingModule,
-    BrowserAnimationsModule,
-    HttpClientModule,
-    MatTableModule,
-    MatCardModule,
-    MatFormFieldModule,
-    MatInputModule,
-    MatDialogModule,
-    MatButtonModule,
-    MatMenuModule,
-    MatCheckboxModule,
-    MatOptionModule,
-    MatSelectModule,
-    MatSnackBarModule,
-    FormsModule
-  ],
-  providers: [
-    CaffeServices,
-    { provide: MAT_CHECKBOX_DEFAULT_OPTIONS, useValue: { clickAction: 'check', color: 'primary' } },
-    {provide: MAT_DIALOG_DEFAULT_OPTIONS, useValue: {hasBackdrop: true}}
-  ],
-  bootstrap: [AppComponent],
-  entryComponents: [OfferDialog]
+    declarations: [
+        AppComponent,
+        ItemsComponent,
+        DiscountOffersComponent,
+        FreeOffersComponent,
+        OrdersComponent,
+        OfferDialog,
+        ItemDialog
+    ],
+    imports: [
+        BrowserModule,
+        AppRoutingModule,
+        BrowserAnimationsModule,
+        HttpClientModule,
+        MatTableModule,
+        MatCardModule,
+        MatFormFieldModule,
+        MatInputModule,
+        MatDialogModule,
+        MatButtonModule,
+        MatMenuModule,
+        MatCheckboxModule,
+        MatOptionModule,
+        MatSelectModule,
+        MatSnackBarModule,
+        MatIconModule,
+        FormsModule,
+    ],
+    providers: [
+        CaffeServices,
+        { provide: MAT_CHECKBOX_DEFAULT_OPTIONS, useValue: { clickAction: 'check', color: 'primary' } },
+        { provide: MAT_DIALOG_DEFAULT_OPTIONS, useValue: { hasBackdrop: true } }
+    ],
+    bootstrap: [AppComponent],
+    entryComponents: [OfferDialog, ItemDialog]
 })
 export class AppModule { }

@@ -2,22 +2,29 @@
     Create Offers</h4>
 <mat-card>
     <mat-card-content>
-        <mat-form-field appearance="fill">
-            <mat-label>Offer Name</mat-label>
-            <input matInput type="text" [(ngModel)]="offerName">
-        </mat-form-field>
-        <mat-form-field appearance="fill">
-            <mat-label>Select</mat-label>
-            <mat-select [(value)]="offerType" (selectionChange)="selectOfferType($event.value)">
-                <mat-option value="discount">Discount</mat-option>
-                <mat-option value="free">Free</mat-option>
-            </mat-select>
-        </mat-form-field>
-        <mat-form-field appearance="fill" *ngIf="offerType==DISCOUNT">
-            <mat-label>Discount Percentage</mat-label>
-            <input matInput type="text" [(ngModel)]="discountPercentage">
-        </mat-form-field>
-
+        <div class="row g-3 align-items-center">
+            <div class="col-auto">
+                <mat-form-field appearance="fill">
+                    <mat-label>Offer Name</mat-label>
+                    <input matInput type="text" [(ngModel)]="offerName" required>
+                </mat-form-field>
+            </div>
+            <div class="col-auto">
+                <mat-form-field appearance="fill">
+                    <mat-label>Select</mat-label>
+                    <mat-select [(value)]="offerType" (selectionChange)="selectOfferType($event.value)" required>
+                        <mat-option value="discount">Discount</mat-option>
+                        <mat-option value="free">Free</mat-option>
+                    </mat-select>
+                </mat-form-field>
+            </div>
+            <div class="col-auto">
+                <mat-form-field appearance="fill" *ngIf="offerType==DISCOUNT">
+                    <mat-label>Discount Percentage</mat-label>
+                    <input matInput type="text" [(ngModel)]="discountPercentage" required>
+                </mat-form-field>
+            </div>
+        </div>
         <div>
             <table mat-table [dataSource]="itemDataSource">
                 <ng-container matColumnDef="select">

@@ -1,0 +1,39 @@
+<h4 mat-dialog-title>
+    Create Item</h4>
+<mat-card>
+    <mat-card-content>
+        <mat-form-field appearance="fill">
+            <mat-label>Item Name</mat-label>
+            <input matInput type="text" [(ngModel)]="itemName" required>
+        </mat-form-field>
+
+        <div *ngFor="let attr of itemAttributes; let i = index">
+            <div class="row g-3 align-items-center">
+                <div class="col-auto">
+                    <mat-form-field appearance="fill">
+                        <mat-label>Quantity</mat-label>
+                        <input matInput type="text" [(ngModel)]="itemAttributes[i].quantity" required>
+                    </mat-form-field>
+                </div>
+                <div class="col-auto">
+                    <mat-form-field appearance="fill">
+                        <mat-label>Price</mat-label>
+                        <input matInput type="text" [(ngModel)]="itemAttributes[i].price" required>
+                    </mat-form-field>
+                </div>
+                <div class="col-auto">
+                    <button mat-mini-fab color="warn" (click)="addVariant()" *ngIf="i+1==itemAttributes.length">
+                        <mat-icon>add</mat-icon>
+                    </button>
+                    <button mat-mini-fab color="warn" (click)="removeVariant(i)" *ngIf="i+1!=itemAttributes.length">
+                        <mat-icon>remove</mat-icon>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </mat-card-content>
+</mat-card>
+<mat-dialog-actions align="start">
+    <button mat-button mat-dialog-close>Cancel</button>
+    <button mat-flat-button class="mat-warn" (click)="createItem()" cdkFocusInitial>Save</button>
+</mat-dialog-actions>
