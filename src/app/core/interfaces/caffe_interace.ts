@@ -34,6 +34,7 @@ export interface MenuItems {
 }
 
 export interface FreeOfferItem {
+    id: number,
     item_name:string;
     quantity: string;
     price: number;
@@ -48,6 +49,7 @@ export interface FreeOffers {
 }
 
 export interface DiscountOfferItem {
+    id: number,
     item_name:string;
     quantity: string;
     price: number;

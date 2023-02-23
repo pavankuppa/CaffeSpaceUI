@@ -70,65 +70,38 @@ export class AppComponent {
 
     createOrders(){
 
-        let order_price = 0
-        let items: any = []
+        //let order_price = 0
+        let variants: any = []
+        let offers: number[] = []
+
 
         if(this.selectedDiscountOffers.length > 0){
             for(let discountOffer of this.selectedDiscountOffers){
-                order_price+=discountOffer.discounted_price
-                for(let discountItem of discountOffer.items){
-                    items.push({
-                        item_name: discountItem.item_name,
-                        offer_type: "discount",
-                        offer_name: discountOffer.name,
-                        quantity: discountItem.quantity,
-                        price: discountItem.price,
-                        discount_percentage: discountOffer.discount_percentage
-                    })
-
-                }
+                offers.push(discountOffer.offer_id)
             }
         }
 
         if(this.selectedFreeOffers.length > 0){
             for(let freeOffer of this.selectedFreeOffers){
-                order_price+=freeOffer.price
-                for(let freeItem of freeOffer.items){
-                    let data: any = {
-                        item_name: freeItem.item_name,
-                        offer_name: freeOffer.name,
-                        offer_type: "free",
-                        quantity: freeItem.quantity,
-                        price: freeItem.price
-                    }
-                    if(freeItem.free){
-                        data.free = freeItem.free
-                    }
-                    items.push(data)
-                }
+                offers.push(freeOffer.offer_id)
             }
 
         }
 
         if(this.selectedItems.length > 0){
             for(let item of this.selectedItems){
-                order_price+=item.price
-                items.push({
-                    item_name: item.name,
-                    quantity: item.quantity,
-                    price: item.price
-                })
+                variants.push(item.variant_id)
             }
         }
 
         let params = {
             order: {
-                order_price:order_price,
-                order_items_attributes: items
+                variants: variants,
+                offers: offers
             }
         }
 
-        if(items.length > 0) {
+        if(variants.length > 0 || offers.length > 0) {
             this.caffeService.createOrders(params).then((response: any)=>{
                 if(response.order_number){
                     this.showNofification(`Your order ${response.order_number} placed successfully.`)
